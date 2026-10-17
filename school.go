@@ -265,7 +265,12 @@ func newCollectData(endpoints []string, hashKey string) collectData {
 		TaskID:                  newTaskID(),
 		TaskName:                "声卡_" + time.Now().Format("060102150405"),
 		TaskPriority:            50,
-		Volume:                  5,
+		/* Volume 是服务端给这路流用的播放音量，0–100（和面板里任务、设备的
+		   音量同一把尺）。原来照抓包写了 5 —— 抓包那台官方客户端当时的音量
+		   正好是 5，不是协议常量，结果推出去的流只有 5%，喇叭上几乎听不见
+		   （2026-10-17 用户实测：对讲和在线播放都小得离谱，iOS 和 Go 两版同病，
+		   说明问题在 collect_pcm 这条共用的报文里）。用户定的是推满：100。 */
+		Volume: 100,
 	}
 }
 
