@@ -68,7 +68,7 @@ import (
 */
 const (
 	appName    = "ITC-PlayAgent"
-	appVersion = "1.0.0"
+	appVersion = "1.0.1"
 )
 
 /*
